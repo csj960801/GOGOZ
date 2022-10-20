@@ -1,0 +1,65 @@
+package com.myapp.DB;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class DB extends DBMapper{
+
+	private static Connection conn = null;
+
+	protected String sql = "";
+
+	public DB() {
+	}
+
+	public static Connection getConnection(String url, String user, String pw) {
+
+		try {
+			if (conn == null) {
+				url = "jdbc:mysql://localhost:3306/Spring?serverTimezone=UTC&useSSL=false&autoReconnect=true&useUnicode=true&characterEncoding=utf8";
+				user = "root";
+				pw = "sevenn0801";
+
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				conn = DriverManager.getConnection(url, user, pw);
+				
+			}
+		} catch (Exception e) {
+			System.out.println("DB연결 실패!" + e.toString());
+		}
+		return conn;
+	}// end of getConnection
+
+	public void Closer(Connection conn, PreparedStatement psmt, ResultSet rs) {
+		try {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+			if (psmt != null) {
+
+				try {
+					psmt.close();
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}// end of Closer()
+
+}// end of class

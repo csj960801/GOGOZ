@@ -1,0 +1,21 @@
+package com.myapp.ServiceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.myapp.Daoimpl.BoardDAOImpl;
+import com.myapp.Service.BoardService;
+import com.myapp.VO.BoardVO;
+
+@Service("com.myapp.Service.BoardService")
+public class BoardServiceImpl implements BoardService {
+
+	@Autowired
+	private BoardDAOImpl boardDao;
+
+	@Override
+	public int InquiryBoard(BoardVO vo) {
+		// TODO Auto-generated method stub
+		return boardDao.InquiryBoard(vo);
+	}
+}

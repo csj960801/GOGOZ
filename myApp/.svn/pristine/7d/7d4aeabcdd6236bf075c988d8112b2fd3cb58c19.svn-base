@@ -1,0 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:if test="${serverport != null}">
+	<div class="ServerPort_Wraper">
+		<label for="server_label">생성된 포트</label>
+		<p>${serverport}</p>
+	</div>
+</c:if>
+<c:choose>
+	<c:when test="${serverport != null}">
+        포트 데이터 없음
+	</c:when>
+</c:choose>

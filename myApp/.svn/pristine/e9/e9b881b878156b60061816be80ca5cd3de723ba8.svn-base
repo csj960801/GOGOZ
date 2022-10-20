@@ -1,0 +1,46 @@
+/**
+ * CSJ
+ */
+window.onload = speech();
+/**
+ * 음성인식 담당 함수
+ * 
+ * @returns
+ */
+function speech() {
+
+	window.SpeechRecognition = window.SpeechRecognition
+			|| window.webkitSpeechRecognition;
+
+	const recog = new SpeechRecognition();
+
+	recog.lang = "ko-KR";
+
+	recog.continuous = true;
+
+	recog.maxAlternatives = 11000;
+
+	recog.interimResults = true;
+
+	recog.start();
+	recog.addEventListener("result", (recogResult) => {
+		console.log(recogResult);
+		
+		for (var i = 0; i < recogResult.results.length; i++) {
+			var data = recogResult.results[i][0].transcript;
+			console.log("인식된데이터: " + data);
+		   
+			// 회원가입
+			if((data.indexOf("가입") > -1) || (data.indexOf("회원가입") > -1)){
+		    	// window.location.href="/index.do?memberReg=no";
+		        alert("회원가입");
+			}
+			// 로그인
+		    if((data.indexOf("로그인") > -1) || (data.indexOf("로긴") > -1)){
+		    	// window.location.href="/index.do?memberReg=yes";
+		        alert("로그인");
+		    }
+		    
+		}
+	});
+};

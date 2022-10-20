@@ -1,0 +1,42 @@
+package com.myapp.ServiceImpl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.myapp.Daoimpl.BoardDAOImpl;
+import com.myapp.Service.BoardService;
+import com.myapp.VO.BoardVO;
+
+@Service("com.myapp.Service.BoardService")
+public class BoardServiceImpl implements BoardService {
+
+	@Autowired
+	private BoardDAOImpl boardDao;
+
+	@Override
+	public int InquiryBoard(BoardVO vo) {
+		// TODO Auto-generated method stub
+		return boardDao.InquiryBoard(vo);
+	}
+
+	@Override
+	public List<BoardVO> userBoard(Map<String, Object> memberName) {
+		// TODO Auto-generated method stub
+		return boardDao.userBoard(memberName);
+	}
+
+	@Override
+	public BoardVO userBoardUpdate(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return boardDao.userBoardUpdate(param);
+	}
+
+	@Override
+	public int InquiryUpdate(BoardVO bvo) {
+		// TODO Auto-generated method stub
+		return boardDao.InquiryUpdate(bvo);
+	}
+}

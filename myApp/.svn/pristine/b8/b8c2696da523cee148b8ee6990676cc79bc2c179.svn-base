@@ -1,0 +1,18 @@
+package com.myapp.DAO;
+
+import java.util.List;
+
+import com.myapp.VO.BoardVO;
+import com.myapp.VO.MemberVO;
+
+public interface AdminDAO {
+
+	// 게시판 관리
+	List<BoardVO> InquiryList(BoardVO vo);
+	int InquiryDel(String titleparam);
+	
+	// 회원 관리
+	List<MemberVO> memberList(MemberVO mvo);
+	int memberDel(String mvo);
+	int memberUpdate(MemberVO mvo);
+}

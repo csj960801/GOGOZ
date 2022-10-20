@@ -1,0 +1,22 @@
+package com.myapp.DAO;
+
+import com.myapp.VO.MemberVO;
+import com.myapp.VO.UpdateVO;
+
+public interface MemberDAO {
+
+	// 회원가입
+	boolean MemberRegister(MemberVO vo);
+
+	// 로그인
+	boolean MemberLog(MemberVO vo);
+
+	// 회원중복검사
+	boolean MemberDuplicateCheck(MemberVO vo);
+	
+	// 회원삭제
+	boolean MemberDelete(String email);
+
+	// 회원수정
+    boolean MemberUpdate(UpdateVO vo);	
+}

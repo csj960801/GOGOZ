@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.sql.boardMapper">
+
+	<resultMap id="board" type="com.myapp.VO.BoardVO">
+		<result property="title" column="BoardTitle" />
+		<result property="writer" column="BoardWriter" />
+		<result property="date" column="BoardDate" />
+		<result property="content" column="BoardContent" />
+		<result property="OriginContent" column="BoardContent" />
+	</resultMap>
+
+    <!-- 게시글 데이터 저장  -->
+	<insert id="inquiry" parameterType="com.myapp.VO.BoardVO">
+		insert into Board(BoardTitle,
+		BoardWriter, BoardDate, BoardContent)
+		values(#{title},#{writer},#{date},#{content})
+	</insert>
+
+	<!-- 유저가 작성했던 게시글 리스트 출력  -->
+	<select id="memberBoardList" resultMap="board" parameterType="HashMap">
+		SELECT BoardTitle,BoardWriter,BoardDate,BoardContent FROM Board
+		WHERE BoardWriter = #{userName}
+	</select>
+
+	<!-- 유저가 작성했던 게시글 데이터 수정  -->
+	<select id="memberBoardUpdate" resultMap="board" parameterType="HashMap">
+		SELECT BoardTitle,BoardWriter,BoardDate,BoardContent FROM Board
+		WHERE BoardContent = #{updateData}
+	</select>
+	
+	<!-- 게시글 데이터 업데이트 -->
+	<update id="inquiryUpdate" parameterType="com.myapp.VO.BoardVO">
+	    UPDATE board SET BoardTitle= #{title}, BoardWriter=#{writer}, BoardDate=#{date},
+	    BoardContent = #{content}
+	    WHERE BoardContent = #{OriginContent}
+	</update>
+</mapper>

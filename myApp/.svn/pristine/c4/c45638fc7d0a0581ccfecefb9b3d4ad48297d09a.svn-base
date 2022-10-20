@@ -1,0 +1,18 @@
+package com.myapp.VO;
+
+import java.io.Serializable;
+
+public class PortVO implements Serializable{
+
+	private String portNum;
+    
+	public PortVO() {}
+	
+	public String getPortNum() {
+		return portNum;
+	}
+
+	public void setPortNum(String portNum) {
+		this.portNum = portNum;
+	}
+}

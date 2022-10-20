@@ -1,0 +1,11 @@
+package com.myapp.DAO;
+
+import java.util.List;
+
+import com.myapp.VO.BoardVO;
+
+public interface AdminDAO {
+
+	List<BoardVO> InquiryList(BoardVO vo);
+	int InquiryDel(String titleparam);
+}

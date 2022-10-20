@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:include page="/Template/Top.jsp" />
+<jsp:include page="/CustomFrameWork/FrameWork/loginNeed.jsp" />
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 col-xs-12">
+			<div class="DelWrapper form-group">
+				<form id="delFrm" name="delFrm">
+					<dl class="del_dl">
+						<dt class="del_dt">
+							<span class="del_h3">회원 이메일</span>
+						</dt>
+						<dd class="del_dd">
+							<input type="text" class="form-control del_email" id="del_email"
+								name="email" autocomplete="off" />
+						</dd>
+						<dd class="del_dd">
+							<button id="delBtn" class="delBtn btn btn-primary">탈퇴</button>
+						</dd>
+					</dl>
+				</form>
+
+				<div class="To_DelMember_Wrapper">
+					<p class="text-center goodbye-p">그동안 서비스를 이용해주신 유저님께 감사드립니다~!</p>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<jsp:include page="/Template/Bottom.jsp" />

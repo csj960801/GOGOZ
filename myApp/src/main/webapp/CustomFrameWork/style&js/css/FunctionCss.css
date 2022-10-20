@@ -1,0 +1,150 @@
+@charset "UTF-8";
+
+@media ( min-width :770px) {
+	.ChenalCreate_wrapper {
+		width: 55%;
+		margin: auto;
+	}
+	.ChenalCreate_wrapper .chanel_label {
+		float: left;
+		padding: 4px 5px 0 0;
+	}
+	.CreateChanel_wrapper input.chanelCreateForm {
+		width: 90%;
+	}
+	.ChenalCreate_wrapper .chanel_p {
+		padding: 10px 0;
+		color: #e21818;
+		text-align: center;
+	}
+	.ChanelListFrm_wrapper {
+		height: 370px;
+		padding: 70px 0;
+	}
+	.ChanelListFrm_wrapper input.chanelFindForm {
+		width: 1%;
+		padding: 0;
+		-moz-transition: all 0.2s ease;
+		-o-transition: all 0.2s ease;
+		-ms-transition: all 0.2s ease;
+		-webkit-transition: all 0.2s ease;
+	}
+	.ChanelListFrm_wrapper input.chanelFindForm:hover {
+		width: 90%;
+		-webkit-transition: all 0.2s ease-in-out;
+		-moz-transition: all 0.2s ease-in-out;
+		-o-transition: all 0.2s ease-in-out;
+		-ms-transition: all 0.2s ease-in-out;
+	}
+	.ChanelListFrm_wrapper h3.chanelList_h3 {
+		text-align: center;
+		font-size: 15px;
+		font-weight: 600;
+		width: 58%;
+		margin: 10px 0;
+		position: relative;
+	}
+	.ChanelListFrm_wrapper h3.chanelList_h3::before {
+		content: "";
+		position: absolute;
+		padding: 2px 5px;
+		background: #333;
+		top: 6px;
+		left: 240px;
+	}
+	.chanel_container .chanellist_tbl td>a {
+		color: #333;
+	}
+	.chanel_container .chanellist_thead, .chanel_container .chanellist_tbody,
+		.chanel_container .chanellist_thead tr th {
+		text-align: center;
+		vertical-align: middle;
+	}
+	.chanel_container .chanel_dt {
+		text-align: center;
+		font-size: 25px;
+		padding: 15px 0;
+	}
+	#functionBtn, #clientfunctionBtn, #uploadBtn, #DownloadBtn, .musicTitle
+		{
+		background: #40f3e2;
+		color: #fff;
+		border: 1px solid #fff;
+	}
+	.FileUpload_wrapper {
+		height: 805px;
+		background: #fff;
+	}
+	.FileUpload_wrapper .fileUpload_row {
+		margin-top: 65px;
+	}
+	.fileUploadTbl .fileUploadHead tr th {
+		text-align: center;
+		padding: 15px 0;
+		color: #fff;
+	}
+	.uploadForm {
+		margin: 15px 0;
+	}
+}
+
+@media ( max-width :769px) {
+	.portNum_wrapper {
+		margin: 30px 0;
+		height: 540px;
+	}
+	.portNum_wrapper .port_dl {
+		padding: 20px 0;
+		display: block;
+	}
+	.port_dl .port_dt {
+		padding: 10px 0;
+		font-size: 10px;
+		text-align: center;
+	}
+	.port_dl .port_dd {
+		padding: 15px 0;
+		text-align: center;
+	}
+	.port_dd .portNum {
+		width: 60%;
+		font-size: 10px;
+		margin: 10px auto;
+	}
+	#functionBtn, #clientfunctionBtn, #uploadBtn, #DownloadBtn, .musicTitle
+		{
+		background: #a31a24;
+		color: #fff;
+		border: 1px solid #fff;
+	}
+	.FileUpload_wrapper {
+		height: 450px;
+	}
+	.FileUpload_wrapper .fileUpload_row {
+		margin-top: 65px;
+	}
+	.fileUploadTbl .fileUploadHead tr th {
+		text-align: center;
+		padding: 15px 0;
+	}
+	.uploadForm {
+		margin: 20px 0;
+	}
+	.musicTbl thead.musicTblHead tr th {
+		text-align: center;
+		font-size: 10px;
+	}
+	.musicTbl tbody.musicTblBody tr td {
+		vertical-align: middle;
+		text-align: center;
+		font-size: 10px;
+	}
+	.musicTbl tbody.musicTblBody tr td#form_parent_td .musicTitle {
+		padding: 5px 2px;
+		border-radius: 5px;
+	}
+	.MusicDownLoader_Wrapper {
+		height: 390px;
+	}
+}
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.sql.MusicMapper">
+
+	<resultMap id="music" type="com.myapp.VO.MusicVO">
+		<result column="uploader" property="uploader" />
+		<result column="uploadDate" property="uploadDate" />
+		<result column="uploadMusic" property="uploadMusic" />
+	</resultMap>
+
+	<!-- 파일 insert -->
+	<insert id="musicinsert" parameterType="com.myapp.VO.MusicVO">
+		INSERT INTO
+		UPLOADEDFILE(uploader,uploadDate,uploadMusic)
+		VALUES(#{uploader},#{uploadDate},#{uploadMusic});
+	</insert>
+
+    <!-- 파일 중복 검사  -->
+	<select id="duplicateFile" resultMap="music">
+	    SELECT uploadMusic FROM UPLOADEDFILE WHERE uploadMusic = #{uploadMusic}
+	</select>
+	
+	<!-- 파일목록출력 -->
+	<select id="fileselect" resultMap="music">
+		SELECT uploader, uploadDate, uploadMusic
+		FROM UPLOADEDFILE
+		WHERE uploadCnt is not null
+	</select>
+
+</mapper>

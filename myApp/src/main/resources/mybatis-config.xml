@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- <typeAliases> <typeAlias type="com.myapp.VO.BoardVO" alias="boardvo" 
+		/> <typeAlias type="com.myapp.VO.MemberVO" alias="membervo" /> <typeAlias 
+		type="com.myapp.VO.UpdateVO" alias="updatevo" /> <typeAlias type="com.myapp.VO.MusicVO" 
+		alias="musicvo" /> <typeAlias type="com.myapp.VO.ChanelVO" alias="chanelvo" 
+		/> </typeAliases> db설정 <environments default="default"> <environment id="default"> 
+		<transactionManager type="JDBC"></transactionManager> <dataSource type="POOLED"> 
+		<property name="username" value="" /> <property name="password" value="" 
+		/> <property name="url" value="" /> <property name="driver" value="" /> </dataSource> 
+		</environment> </environments> <mappers> <mapper resource="mapper/sql/memberMapper.xml" 
+		/> <mapper resource="mapper/sql/boardMapper.xml" /> <mapper resource="mapper/sql/AdminMapper.xml" 
+		/> <mapper resource="mapper/sql/MusicMapper.xml" /> <mapper resource="mapper/sql/ChanelMapper.xml" 
+		/> </mappers> -->
+</configuration>

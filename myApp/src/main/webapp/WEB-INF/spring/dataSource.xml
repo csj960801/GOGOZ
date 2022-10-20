@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <!-- db정보를 담고있는 파일을 가져다 사용 -->
+	<context:property-placeholder location="classpath:config/database.properties" />
+
+	<!-- db정보 로딩 -->
+	<beans:bean id="datasource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+             <beans:property name="driverClass" value="${db.driverClass}" />
+             <beans:property name="url" value="${db.url}" />
+             <beans:property name="username" value="${db.password}" />
+             <beans:property name="password" value="${db.userName}" /> 
+    </beans:bean>
+    
+	<!-- 세션 생성을 위한 sqlSessionFactory 객체 생성 -->
+	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	    <beans:property name="dataSource" ref="datasource" />
+	    <beans:property name="configLocation" value="classpath:mybatis-config.xml" />
+	    <beans:property name="mapperLocations">
+	        <beans:list>
+	            <beans:value>classpath:mapper/sql/memberMapper.xml</beans:value>
+	            <beans:value>classpath:mapper/sql/AdminMapper.xml</beans:value>
+	            <beans:value>classpath:mapper/sql/boardMapper.xml</beans:value>
+	            <beans:value>classpath:mapper/sql/ChanelMapper.xml</beans:value>
+	            <beans:value>classpath:mapper/sql/MusicMapper.xml</beans:value>
+	            <beans:value>classpath:mapper/sql/SocketMapper.xml</beans:value>
+	        </beans:list>
+	    </beans:property>
+	</beans:bean>
+	
+	<!-- 세션 생성 -->
+	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+	  <beans:constructor-arg ref="sqlSessionFactory" />
+	</beans:bean>
+</beans:beans>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.sql.SocketMapper">
+
+	<resultMap id="serverPort" type="com.myapp.VO.PortVO">
+		<result property="portNum" column="portNum" />
+	</resultMap>
+
+	<!-- 서버에서 생성된 port 저장 -->
+	<insert id="socketinsert" parameterType="com.myapp.VO.PortVO">
+		insert into serverport
+		values(#{portNum})
+	</insert>
+
+	<!-- 포트데이터 제거 -->
+	<delete id="portDel" parameterType="com.myapp.VO.PortVO">
+		delete from serverport
+	</delete>
+
+	<!-- 포트 중복 검사 -->
+	<select id="socketDuplicate" resultMap="serverPort">
+		select portNum from
+		serverport where portNum = #{portNum}
+	</select>
+
+	<!-- 생성된 전체 포트데이터 불러오기 -->
+	<select id="socketList" resultMap="serverPort">
+		select portNum from serverport
+	</select>
+
+</mapper>

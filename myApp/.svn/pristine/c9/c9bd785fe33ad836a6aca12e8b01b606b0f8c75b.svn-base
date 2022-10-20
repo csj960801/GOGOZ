@@ -1,0 +1,61 @@
+package com.myapp.Daoimpl;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
+
+import com.myapp.DAO.AdminDAO;
+import com.myapp.MybatisFactory.SessionFactoryGenerator;
+import com.myapp.VO.BoardVO;
+import com.myapp.VO.MemberVO;
+
+@Repository("com.myapp.DAO.AdminDAO")
+public class AdminDAOImpl implements AdminDAO {
+
+	private Logger adminLogger = LoggerFactory.getLogger(this.getClass());
+
+	/**
+	 * 관리자 전용 게시판 데이터 출력
+	 */
+	@Override
+	public List<BoardVO> InquiryList(BoardVO vo) {
+		SqlSession session = SessionFactoryGenerator.sessionFactoryInstance().openSession();
+		List<BoardVO> adminInquiry = session.selectList("adminInquiry", vo);
+		adminLogger.info("-----------------------------------------------");
+		adminLogger.info("질문 게시판에 데이터 존재합니다. 관리자페이지에서 확인 가능합니다.");
+		adminLogger.info("-----------------------------------------------");
+		return adminInquiry;
+	}
+
+	/**
+	 * 관리자 전용 게시판 데이터 삭제
+	 */
+	@Override
+	public int InquiryDel(String titleparam) {
+		SqlSession session = SessionFactoryGenerator.sessionFactoryInstance().openSession();
+		int inquirydel = session.delete("adminDel", titleparam);
+		if (inquirydel > 0) {
+			adminLogger.info("============================================");
+			adminLogger.info("삭제완료");
+			adminLogger.info("============================================");
+			session.commit();
+		}
+		return inquirydel;
+	}
+
+	/**
+	 * 관리자 전용 회원 정보 출력
+	 */
+	@Override
+	public List<MemberVO> memberList(MemberVO mvo) {
+		SqlSession session = SessionFactoryGenerator.sessionFactoryInstance().openSession();
+		List<MemberVO> memberlist = session.selectList("memberList", mvo);
+		adminLogger.info("===================================================");
+		adminLogger.info("회원 정보들을 출력했습니다.");
+		adminLogger.info("===================================================");
+		return memberlist;
+	}
+}

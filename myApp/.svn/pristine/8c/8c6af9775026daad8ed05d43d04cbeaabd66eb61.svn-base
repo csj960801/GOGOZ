@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.sql.AdminMapper">
+	<resultMap id="admin" type="com.myapp.VO.BoardVO">
+		<result property="title" column="BoardTitle" />
+		<result property="writer" column="BoardWriter" />
+		<result property="date" column="BoardDate" />
+		<result property="content" column="BoardContent" />
+	</resultMap>
+
+	<select id="adminInquiry" resultMap="admin">
+		SELECT BoardTitle,
+		BoardWriter, BoardDate, BoardContent from board
+	</select>
+
+	<delete id="adminDel" parameterType="String">
+		DELETE FROM board WHERE BoardTitle=#{titleparam}
+	</delete>
+
+</mapper>

@@ -1,0 +1,48 @@
+package com.myapp.ServiceImpl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.myapp.Daoimpl.AdminDAOImpl;
+import com.myapp.Service.AdminService;
+import com.myapp.VO.BoardVO;
+import com.myapp.VO.MemberVO;
+
+@Service("com.myapp.Service.AdminService")
+public class AdminServiceImpl implements AdminService {
+	
+    @Autowired
+    private AdminDAOImpl adminDao;
+    
+	@Override
+	public List<BoardVO> InquiryList(BoardVO vo) {
+		// TODO Auto-generated method stub
+		return adminDao.InquiryList(vo);
+	}
+	
+	@Override
+	public int InquiryDel(String titleparam) {
+		// TODO Auto-generated method stub
+		return adminDao.InquiryDel(titleparam);
+	}
+
+	@Override
+	public List<MemberVO> memberList(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return adminDao.memberList(mvo);
+	}
+
+	@Override
+	public int memberDel(String mvo) {
+		// TODO Auto-generated method stub
+		return adminDao.memberDel(mvo);
+	}
+
+	@Override
+	public int memberUpdate(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return adminDao.memberUpdate(mvo);
+	}
+}

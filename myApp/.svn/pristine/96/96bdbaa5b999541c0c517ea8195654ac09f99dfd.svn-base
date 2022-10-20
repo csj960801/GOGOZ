@@ -1,0 +1,178 @@
+package com.myapp.Controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.myapp.ServiceImpl.AdminServiceImpl;
+import com.myapp.ServiceImpl.BoardServiceImpl;
+import com.myapp.ServiceImpl.MemberServiceImpl;
+import com.myapp.VO.BoardVO;
+import com.myapp.VO.MemberVO;
+import com.myapp.VO.UpdateVO;
+
+@Controller
+public class AppController extends HttpServlet {
+
+	@Autowired
+	// 회원 관련 서비스
+	private MemberServiceImpl memberService;
+
+	@Autowired
+	// 게시판 관련 서비스
+	private BoardServiceImpl boardService;
+
+	@Autowired
+	// 관리자 관련 서비스
+	private AdminServiceImpl adminService;
+
+	// System.out.println은 실프로젝트에서 사용하면 하드디스크io에 무리를 가할 수있으므로
+	// 웬만하면 logging을 사용하도록 합시다
+	private Logger log = LoggerFactory.getLogger(AppController.class);
+
+	/**
+	 * 메인
+	 */
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String home() {
+		log.info("--------------------");
+		log.info("메인으로 이동합니다.");
+		log.info("--------------------");
+		return "index";
+	}// end of home()
+
+	/**
+	 * 회원가입
+	 */
+	@RequestMapping("/MemberReg/MemberReg.do")
+	public Map<String, Object> MemberReg(@ModelAttribute("regvo") MemberVO memberRegvo) {
+
+		Map<String, Object> regMap = new HashMap<String, Object>();
+		if (!MemberDuplicateCheck(memberRegvo)) {
+			regMap.put("MemberReg", memberService.MemberRegister(memberRegvo));
+		} else {
+			regMap.put("duplicated", true);
+		}
+		return regMap;
+	}
+
+	/**
+	 * 로그인
+	 */
+	@RequestMapping("/MemberLog/MemberLog.do")
+	public Map<String, Object> MemberLog(@ModelAttribute("loginvo") MemberVO loginvo, HttpServletRequest req) {
+
+		Map<String, Object> logMap = new HashMap<String, Object>();
+		boolean login = memberService.MemberLog(loginvo);
+
+		logMap.put("login", login);
+
+		// 로그인이 정상적으로 진행되었을 때 생성할 session
+		if (login) {
+			HttpSession session = req.getSession();
+			session.setAttribute("loginName", loginvo.getName());
+		}
+		return logMap;
+	}
+
+	/**
+	 * 회원중복 여부
+	 */
+	public boolean MemberDuplicateCheck(MemberVO vo) {
+		boolean duplicateMember = memberService.MemberDuplicateCheck(vo);
+		return duplicateMember;
+	}
+
+	/**
+	 * 로그아웃
+	 */
+	@RequestMapping("/MemberLogout.do")
+	public String logOut(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		session.invalidate();
+		return "index";
+	}
+
+	/**
+	 * 회원탈퇴
+	 */
+	@RequestMapping("/MemberDel/MemberDel.do")
+	public Map<String, Object> MemberDelete(MemberVO vo, HttpServletRequest req) {
+		Map<String, Object> delMap = new HashMap<String, Object>();
+
+		boolean delete = memberService.MemberDelete(vo.getEmail());
+		if (delete) {
+			HttpSession session = req.getSession();
+			session.invalidate();
+		}
+		delMap.put("del", delete);
+		return delMap;
+	}
+
+	/**
+	 * 회원수정
+	 */
+	@RequestMapping("/MemberUpdate/MemberUpdate.do")
+	public Map<String, Object> MemberUpdate(UpdateVO updatevo) {
+		Map<String, Object> updateMap = new HashMap<String, Object>();
+
+		boolean update = memberService.MemberUpdate(updatevo);
+
+		updateMap.put("update", update);
+		return updateMap;
+	}
+
+	/**
+	 * 질문 게시판
+	 */
+	@RequestMapping("/InquiryBoard/Inquiry.do")
+	public Map<String, Object> InquiryBoard(@ModelAttribute("board") BoardVO bvo) {
+		Map<String, Object> boardMap = new HashMap<String, Object>();
+
+		int inquiryCnt = boardService.InquiryBoard(bvo);
+		if (inquiryCnt > 0) {
+			boardMap.put("inquiry", inquiryCnt);
+		}
+		return boardMap;
+	}
+
+	/**
+	 * 관리자 전용 문의글 확인
+	 */
+	@RequestMapping("/Admin/Admin.do")
+	public List<BoardVO> InquiryList(@ModelAttribute("adminboard") BoardVO adminvo, Model model,
+			HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		session.setAttribute("adminSession", "Admin");
+
+		List<BoardVO> InquiryBoard = adminService.InquiryList(adminvo);
+		model.addAttribute("Inquirylist", InquiryBoard);
+		return InquiryBoard;
+	}
+
+	/**
+	 * 관리자 전용 문의글 삭제
+	 */
+	@RequestMapping("/Admin/AdminDel.do")
+	public Map<String, Object> InquiryDel(@RequestParam("titleparam") String titleparam) {
+		Map<String, Object> inquirydelMap = new HashMap<String, Object>();
+		int inquirydel = adminService.InquiryDel(titleparam);
+		if (inquirydel > 0) {
+			inquirydel = 1;
+			inquirydelMap.put("admindel", inquirydel);
+		}
+		return inquirydelMap;
+	}
+}// end of class

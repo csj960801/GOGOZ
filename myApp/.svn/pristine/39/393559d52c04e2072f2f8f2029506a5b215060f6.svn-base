@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.sql.AdminMapper">
+    <!-- 게시판 관리  -->
+	<resultMap id="adminBoard" type="com.myapp.VO.BoardVO">
+		<result property="title" column="BoardTitle" />
+		<result property="writer" column="BoardWriter" />
+		<result property="date" column="BoardDate" />
+		<result property="content" column="BoardContent" />
+	</resultMap>
+	
+	<!-- 회원 관리  -->
+	<resultMap id="adminMember" type="com.myapp.VO.MemberVO">
+		<result property="name" column="name" />
+		<result property="email" column="email" />
+	</resultMap>
+
+    <!-- 게시판 데이터 출력  -->
+	<select id="adminInquiry" resultMap="adminBoard">
+		SELECT BoardTitle,
+		BoardWriter, BoardDate, BoardContent from board
+	</select>
+
+    <!-- 게시판 데이터 삭제  -->
+	<delete id="adminDel" parameterType="String">
+		DELETE FROM board WHERE BoardTitle=#{param}
+	</delete>
+
+    <!-- 회원 데이터 출력  -->
+	<select id="memberList" resultMap="adminMember">
+		SELECT name, email from member
+	</select>
+
+    <!-- 회원 데이터 삭제  -->
+	<delete id="memberDel" parameterType="String">
+		DELETE FROM member WHERE name = #{param}
+	</delete>
+
+    <!-- 회원 데이터 정보 수정  -->
+	<update id="memberUpdate" parameterType="com.myapp.VO.MemberVO">
+		UPDATE member SET name=#{name}, email=#{email}
+		WHERE memberCnt is not null
+	</update>
+
+
+</mapper>

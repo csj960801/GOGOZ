@@ -1,0 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Blocked for 24Hours</title>
+</head>
+<body>
+	<div class="login_fail_24 container">
+		<p class="text-center login_fail_24_p">
+			${requestScope.loginFail}은 24시간동안 서비스를 이용하실 수 없습니다.
+		</p>
+	</div>
+</body>
+</html>

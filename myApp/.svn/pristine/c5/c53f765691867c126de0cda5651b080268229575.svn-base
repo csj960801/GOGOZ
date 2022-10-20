@@ -1,0 +1,58 @@
+package com.myapp.Interceptor;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+public class InterCeptorGenerator extends HandlerInterceptorAdapter {
+
+	private Logger interCeptorLog = LoggerFactory.getLogger(this.getClass());
+
+	/**
+	 * 관리자계정인지 유저계정인지 검사하는 handler
+	 */
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		return true;
+	}
+	public int UserOrAdmin(String name, String email) {
+		int flag = 0;
+		if (name.equals("CsJ") && email.equals("CsJ@admin.com")) {
+
+			interCeptorLog.info("----------------------");
+			interCeptorLog.info("관리자 접속 확인 되었습니다");
+			interCeptorLog.info("----------------------");
+			flag = 1;
+
+		} else {
+			flag = 0;
+		}
+
+		return flag;
+	}
+
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		if (UserOrAdmin(name, email) == 1) {
+			response.sendRedirect("/Admin/Admin.do");
+		}
+	}
+
+	@Override
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+			throws Exception {
+		/*
+		 * interCeptorLog.info("-----------------------------------");
+		 * interCeptorLog.info("관리자 페이지 호출 완료!");
+		 * interCeptorLog.info("-----------------------------------");
+		 */
+	}
+}

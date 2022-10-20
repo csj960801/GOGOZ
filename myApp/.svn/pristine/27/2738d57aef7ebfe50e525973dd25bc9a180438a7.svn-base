@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.sql.boardMapper">
+	
+	<resultMap id="board" type="boardvo">
+		<result property="title" column="BoardTitle" />
+		<result property="writer" column="BoardWriter" />
+		<result property="date" column="BoardDate" />
+		<result property="content" column="BoardContent" />
+	</resultMap>
+
+	<insert id="inquiry" parameterType="com.myapp.VO.BoardVO">
+		insert into Board(BoardTitle, BoardWriter, BoardDate, BoardContent)
+		values(#{title},#{writer},#{date},#{content})
+	</insert>
+</mapper>

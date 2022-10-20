@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.sql.memberMapper">
+
+	<resultMap type="com.myapp.VO.MemberVO" id="result">
+		<result property="name" column="name" />
+		<result property="email" column="email" />
+	</resultMap>
+
+	<!-- 회원가입 -->
+	<insert id="MemberRegister" parameterType="com.myapp.VO.MemberVO">
+		INSERT INTO member(name,email) VALUES(#{name},#{email})
+	</insert>
+
+	<!-- 로그인 -->
+	<select id="memberlog" resultMap="result" parameterType="com.myapp.VO.MemberVO">
+		select name, email from member
+		where email=#{email} and name=#{name}
+	</select>
+
+	<!-- 회원중복검사 -->
+	<select id="memberduplicate" resultMap="result">
+		select name from member
+		where name=#{name}
+	</select>
+
+	<!-- 회원탈퇴 -->
+	<delete id="memberdel" parameterType="String">
+		DELETE FROM MEMBER WHERE
+		email=#{email}
+	</delete>
+
+	<!-- 회원정보수정 -->
+	<update id="memberupdate" parameterType="com.myapp.VO.UpdateVO">
+		update member set
+		email=#{modifyEmail} where email=#{originEmail}
+	</update>
+</mapper> 
