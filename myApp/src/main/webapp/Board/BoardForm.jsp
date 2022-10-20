@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/Template/Top.jsp" />
 <jsp:include page="/CustomFrameWork/FrameWork/loginNeed.jsp" />
-
+ 
 <div class="board-wrapper">
 	<div class="content-title">
 		<h2 class="content-menu-h2">Board</h2>
